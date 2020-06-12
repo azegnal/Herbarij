@@ -1,0 +1,154 @@
+
+
+<!doctype html>
+<html lang="en">
+<?php
+if (isset($_POST['vrsta']))
+{
+ $vrsta=$_POST['vrsta'];
+}
+if (isset($_POST['porodica']))
+{
+ $porodica=$_POST['porodica'];
+}
+if (isset($_POST['lokacija']))
+{
+ $lokacija=$_POST['lokacija'];
+}
+if (isset($_POST['datum']))
+{
+ $datum=$_POST['datum'];
+}
+
+if (isset($_POST['ime']))
+{
+ $ime=$_POST['ime'];
+}
+
+
+// ---------------XML-----------------
+$result="";
+$result.="<Unos>";
+$result.="<Vrsta>".$vrsta."</Vrsta>";
+$result.="<Porodica>".$porodica."</Porodica>";
+$result.="<Lokacija>".$lokacija."</Lokacija>";
+$result.="<Datum>".$datum."</Datum>";
+$result.="<Ime>".$ime."</Ime>";
+$result.="</Unos>";
+file_put_contents("$vrsta.xml",$result);
+
+
+?>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Herbarij</title>
+    <style>
+        body{
+            background-image: url("pozadina.jpg");
+        }
+        ul {
+        list-style-type:none;
+        margin:0 auto;
+        }
+        li {
+            float:left;
+        }
+        .navigacija {
+            padding-left:30px;
+            padding-right:30px;
+            color:white;
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        }
+        .navigacija:hover {
+            color:lightgreen;
+            text-decoration: none;
+        }
+        .jumbotron h1, p{
+            margin-left: 5%;
+        }
+        .jumbotron {
+            background-image: url("lisce.jpg");
+            background-size: cover;
+        }
+        h1{
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        }
+        form {
+            font-family: "Lucida Console", Courier, monospace;
+        }
+        .prostor{
+            padding: 1% 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="jumbotron text-white" style="margin-bottom:0">
+        <h1>Herbarij</h1>
+        <p>Forma za unošenje uzoraka u herbarijsku zbirku</p> 
+      </div>
+      
+      <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul>
+            <li>
+                <a target="_blank" class="navigacija" style="" href="https://www.sumfak.unizg.hr/">Šumarski fakultet</a>
+            </li>
+            <li>
+                <a target="_blank" class="navigacija" href="https://www.sumfak.unizg.hr/hr/sumarski-odsjek/zavod-za-sumarsku-genetiku-dendrologiju-i-botaniku/predmeti/botanika/">Botanika</a>
+            </li>
+            <li>
+                <a target="_blank" class="navigacija" href="https://www.sumfak.unizg.hr/hr/sumarski-odsjek/zavod-za-sumarsku-genetiku-dendrologiju-i-botaniku/predmeti/dendrologija-pu/">Dendrologija</a>
+            </li>    
+          </ul>
+        </div>  
+      </nav>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <form method="post" action="projekt.php">
+                    <div class="form-group">
+                      <label for="vrsta">Znanstveni naziv</label>
+                      <input type="text" name="vrsta" class="form-control" id="vrsta" >
+                    </div>
+                    <div class="form-group">
+                        <label for="porodica">Porodica</label>
+                        <input type="text" name="porodica" class="form-control" id="porodica">
+                    </div>
+                    <div class="form-group">
+                        <label for="lokacija">Nalazište</label>
+                        <input type="text" name="lokacija" class="form-control" id="lokacija">
+                    </div>
+                    <div class="form-group">
+                        <label for="datum">Datum prikupljanja</label>
+                        <input type="date" name="datum" class="form-control" id="datum">
+                    </div>
+                    <div class="form-group">
+                        <label for="ime">Prikupio/la</label>
+                        <input type="text" name="ime" class="form-control" id="ime">
+                    </div>
+                    
+                    <label class="prostor" for="porijeklo">Porijeklo</label> <div></div>
+                    <input list="porijeklo" placeholder="Izaberi">
+                    <datalist id="porijeklo">
+                        <option value="Autohtono">
+                        <option value="Alohtono">
+                    </datalist>  
+                 
+                <div style="display:table; margin:0 auto;">
+                    <div style="display: table;margin: 0 auto;float: left;">
+                      <button type="submit" class="btn btn-secondary mt-5">Spremi kao XML</button>
+                    </div>
+                    <div style="float:left;padding-left: 30px;">
+                        <input type="reset" class="btn btn-secondary mt-5" value="Reset">
+                    </div>
+                </div>  
+                </form>
+        </div>
+        <div class="mb-5"></div>
+    </div>
+</body>
+
+</html>
